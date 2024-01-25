@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+ics = "*"
+tmdb = {git = "git+https://github.com/isaacsancheza/tmdb"}
+boto3 = "*"
+python-dateutil = "*"
+
+[dev-packages]
+mypy = "*"
+autopep8 = "*"
+aws-cdk-lib = "*"
+boto3-stubs = {extras = ["ssm", "s3"], version = "*"}
+
+[requires]
+python_version = "3.12"

@@ -1,0 +1,20 @@
+name: build docker image
+run-name: building docker image
+
+on:
+  push:
+    paths:
+      - 'app/**'
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    permissions:
+      contents: read
+      packages: write
+    uses: isaacsancheza/workflows/.github/workflows/build-and-push.yaml@master
+    with:
+      tag: latest
+      context: app
