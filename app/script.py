@@ -277,7 +277,7 @@ if __name__ == '__main__':
     for movie_id in movie_ids:
         update_movie(movie_id)
     
-    # update details of upcoming
+    # update upcoming series
     upcoming_series = tmdb.series.get_upcoming_series(since, until)
     serie_ids = [m['id'] for m in upcoming_series]
     for serie_id in serie_ids:
