@@ -282,3 +282,7 @@ if __name__ == '__main__':
     serie_ids = [m['id'] for m in upcoming_series]
     for serie_id in serie_ids:
         update_serie(serie_id)
+
+    # create calendars
+    create_movies_calendar()
+    create_series_calendar()
