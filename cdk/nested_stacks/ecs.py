@@ -56,7 +56,7 @@ class ECSNestedStack(cdk.NestedStack):
                     'ACCESS_TOKEN_PARAMETER_NAME': ssm_nested_stack.access_token_parameter.parameter_name,
                 },
             ),
-            schedule=appscaling.Schedule.rate(cdk.Duration.days(7)),
+            schedule=appscaling.Schedule.cron(hour='10', minute='0', week_day='1'),
             subnet_selection=ec2.SubnetSelection(subnet_type=ec2.SubnetType.PUBLIC),
         )
         
