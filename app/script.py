@@ -197,7 +197,7 @@ def create_movies_calendar():
 
         for release_date in mx_release_dates:
             event = {
-                'name': title,
+                'name': f'🍿 {title}',
                 'begin': release_date['release_date'],
                 'description': movie['details']['overview'],
             }
@@ -248,7 +248,7 @@ def create_series_calendar():
                 continue
 
             event = {
-                'name': f'T{season_number} {serie["details"]["name"]}',
+                'name': f'📺 T{season_number} {serie["details"]["name"]}',
                 'begin': air_date,
                 'description': season['overview'] if season['overview'] else serie['details']['overview'],
             }
