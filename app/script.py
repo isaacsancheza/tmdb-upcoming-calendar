@@ -193,17 +193,19 @@ def create_movies_calendar():
         regional_title = [entry['title'] for entry in movie['alternative_titles'] if entry['iso_3166_1'] == 'MX']
         
         title = regional_title[0] if regional_title else original_title
-        homepage = movie['details']['homepage']
 
         for release_date in mx_release_dates:
+            url = f'https://themoviedb.org/movie/{movie["id"]}?language=es'
+            description = movie['details']['overview']
+            if description:
+                description += '\n\n' + url
+            else:
+                description = url
             event = {
                 'name': f'🍿 {title}',
                 'begin': release_date['release_date'],
-                'description': movie['details']['overview'],
+                'description': description,
             }
-            if homepage:
-                event['url'] = homepage
-            
             event = Event(**event)
             event.make_all_day()
 
@@ -233,8 +235,6 @@ def create_series_calendar():
         
         serie = loads(response['Body'].read().decode())
 
-        homepage = serie['details']['homepage']
-
         for season in serie['details']['seasons']:
             air_date = season['air_date']
             season_number = season['season_number']
@@ -246,15 +246,20 @@ def create_series_calendar():
             # avoid seasons > 2 years old
             if air_date.year < today.year - 1:
                 continue
-
+            
+            url = f'https://themoviedb.org/tv/{serie["id"]}?language=es'
+            description = season['overview'] if season['overview'] else serie['details']['overview']
+            if description:
+                description += '\n\n' + url
+            else:
+                description = url
+            
             event = {
                 'name': f'📺 T{season_number} {serie["details"]["name"]}',
                 'begin': air_date,
-                'description': season['overview'] if season['overview'] else serie['details']['overview'],
+                'description': description,
             }
-            if homepage:
-                event['url'] = homepage
-            
+
             event = Event(**event)
             event.make_all_day()
 
@@ -279,7 +284,7 @@ if __name__ == '__main__':
     
     # update upcoming series
     upcoming_series = tmdb.series.get_upcoming_series(since, until)
-    serie_ids = [m['id'] for m in upcoming_series]
+    serie_ids = [m['id'] for m in upcoming_series]b
     for serie_id in serie_ids:
         update_serie(serie_id)
 
