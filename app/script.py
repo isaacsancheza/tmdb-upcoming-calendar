@@ -198,7 +198,7 @@ def create_movies_calendar():
             url = f'https://themoviedb.org/movie/{movie["id"]}?language=es'
             description = movie['details']['overview']
             if description:
-                description += '\n\n' + url
+                description += '\n' + url
             else:
                 description = url
             event = {
@@ -250,7 +250,7 @@ def create_series_calendar():
             url = f'https://themoviedb.org/tv/{serie["id"]}?language=es'
             description = season['overview'] if season['overview'] else serie['details']['overview']
             if description:
-                description += '\n\n' + url
+                description += '\n' + url
             else:
                 description = url
             
