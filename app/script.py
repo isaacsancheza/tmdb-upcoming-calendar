@@ -284,7 +284,7 @@ if __name__ == '__main__':
     
     # update upcoming series
     upcoming_series = tmdb.series.get_upcoming_series(since, until)
-    serie_ids = [m['id'] for m in upcoming_series]b
+    serie_ids = [m['id'] for m in upcoming_series]
     for serie_id in serie_ids:
         update_serie(serie_id)
 
